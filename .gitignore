@@ -1,0 +1,13 @@
+# Compiled Terraform files
+*.tfstate
+*.tfstate.backup
+*.tfplan
+
+# Local .terraform directories
+**/.terraform/
+
+# Crash log files
+crash.log
+
+# Exclude any other files or directories specific to your development environment
+

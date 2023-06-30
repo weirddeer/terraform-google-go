@@ -24,7 +24,6 @@ variable "region" {
 variable "project" {
   type        = string
   description = "The project ID to deploy to."
-  default     = "weirddeer-prod"
 }
 
 variable "credentials" {

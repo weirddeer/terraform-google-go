@@ -15,6 +15,17 @@ terraform {
   }
 }
 
+variable "service" {
+  type        = string
+  description = "The name of the service."
+}
+
+variable "stage" {
+  type        = string
+  description = "The stage to deploy to."
+  default     = "dev"
+}
+
 variable "region" {
   type        = string
   description = "The region to deploy to."

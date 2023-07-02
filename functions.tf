@@ -5,6 +5,7 @@ locals {
 // get a list of all folders in the functions directory only go one level deep
 locals {
   functions = fileset(local.root, "*/*")
+  prefix    = "${var.service}-${var.stage}-"
 }
 
 // split on the first slash to get the function name
@@ -29,7 +30,7 @@ resource "null_resource" "function_archive" {
 resource "google_storage_bucket_object" "function_deploy_archive" {
   for_each = fileset(local.root, "*.zip")
 
-  name   = each.value
+  name   = "${local.prefix}-${each.value}"
   bucket = google_storage_bucket.functions_bucket.name
   source = "${local.root}/${each.value}"
 }
@@ -38,7 +39,7 @@ resource "google_storage_bucket_object" "function_deploy_archive" {
 resource "google_cloudfunctions_function" "functions_deploy" {
   for_each = fileset(local.root, "*.zip")
 
-  name                  = element(split(".", each.value), 0)
+  name                  = "${local.prefix}-${element(split(".", each.value), 0)}"
   description           = "Cloud Function ${each.value}"
   runtime               = "go120"
   source_archive_bucket = google_storage_bucket.functions_bucket.name

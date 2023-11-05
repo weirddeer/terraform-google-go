@@ -40,7 +40,7 @@ variable "project" {
 variable "credentials" {
   type        = string
   description = "The path to the credentials file."
-  default     = "../creds.json"
+  default     = "../service-account.json"
 }
 
 variable "service_account_email" {
@@ -49,7 +49,7 @@ variable "service_account_email" {
 }
 
 provider "google" {
-  credentials = file(var.credentials)
+  credentials = var.credentials
   project     = var.project
   region      = var.region
 }

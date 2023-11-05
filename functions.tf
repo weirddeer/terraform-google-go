@@ -47,4 +47,5 @@ resource "google_cloudfunctions_function" "functions_deploy" {
   entry_point           = element(split(".", each.value), 0)
   available_memory_mb   = 128
   trigger_http          = true
+  service_account_email = var.service_account_email
 }

@@ -43,6 +43,11 @@ variable "credentials" {
   default     = "../creds.json"
 }
 
+variable "service_account_email" {
+  type        = string
+  description = "The service account email to use."
+}
+
 provider "google" {
   credentials = file(var.credentials)
   project     = var.project
